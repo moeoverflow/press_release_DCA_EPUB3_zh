@@ -6,11 +6,11 @@
 
 --------
 
-**— Work In Progress —**
+**— Working In Progress —**
 
+**注：Github网页端不支持示例代码中的彩色部分，请前往<a href="<https://github.com/moeoverflow/press_release_DCA_EPUB3_zh/releases>">releases</a>**
 
-
-本指南是用于漫画内容制作开发和阅读器（RS）的 EPUB3 固定布局规范。 目前，IDPF（[国际数字出版论坛](https://zh.wikipedia.org/w/index.php?title=國際數位出版論壇&action=edit&redlink=1) [International Digital Publishing Forum](http://idpf.org/)）指定的 EPUB3 规范中允许多样的表述，这导致了各方制作的文件有差别，因阅读器的差异不能顺利显示的情况。希望本指南的使用，能促进数字漫画的制作和出版，使尽可能更多的漫画在尽可能更多的电子书店上架，为读者带来丰富的阅读体验。
+本指南是用于漫画电子书制作开发和阅读器（RS）的 EPUB3 固定布局规范的总结。 目前，IDPF（[国际数字出版论坛](https://zh.wikipedia.org/w/index.php?title=國際數位出版論壇&action=edit&redlink=1) [International Digital Publishing Forum](http://idpf.org/)）指定的 EPUB3 规范中允许多样的写法，这导致了各方制作的文件有差别，因阅读器的差异不能顺利显示的情况。希望本指南的使用，能促进数字漫画的制作和出版，使尽可能更多的漫画在尽可能更多的电子书店上架，为读者带来丰富的阅读体验。
 
 ## 1. 基本的目录结构和文件名
 
@@ -27,11 +27,11 @@ root 文件夹
     └── xhtml 文件夹
 ```
 
-* root 文件夹的名字由出版社指定
+* root 根文件夹的名字由出版社指定
 
 * 文件和文件夹的名字原则上使用小写字母（META-INF 和（企业）管理代码等有个别规定除外）
 
-* 根据元信息文件(opf)中的 `<item>` 标签，资源文件夹的名字应该为 item（规范允许任意名字）
+* 资源文件夹的名字与元信息文件(opf)中的 `<item>` 标签对应，使用"item"（规范允许任意名字）
 
   ```
   译注：opf文件是记录电子书元信息的文件，暂称“元信息文件(opf)”，下同
@@ -57,9 +57,9 @@ root 文件夹
 
 * 正文文本每次换页时，都分割为新创建的xhtml文件
 
-* 该文件的标题基于该作品的标题
+* 文件的标题基于该作品的标题
 
-  在 xhtml 文档中 `<title>` 标签的内容，除非出版商有特别规定的情况，都应该填上作品的标题，与元信息文件(opf)中的作品名一致。主副标题和系列名中的空格使用全角空格。合集等包含多个不同作品的情况，使用出版商指定的名字。
+   xhtml 文档中 `<title>` 标签的内容，除非出版商有特别规定的情况，应该填上作品的标题，与元信息文件(opf)中的作品名一致。主副标题和系列名中的空格使用全角空格。合集等包含多个不同作品的情况，使用出版商指定的名字。
 
 * 只在封面和导航文档中使用 epub:type
 
@@ -69,14 +69,12 @@ root 文件夹
 
   导航文档 `<nav epub:type="toc" id="toc">`
   
-  epub:type属性应当写在class和id的前面 (?)  //TODO
-
-
+  epub:type属性应当写在class和id的前面
 
 ## 3. 简单的编码规则
 
 * 字符编码推荐 UTF-8N（无BOM）
-* 换行符在同一个文件中不可混用（？）  //TODO
+* <a href="[https://ja.wikipedia.org/wiki/%E6%94%B9%E8%A1%8C%E3%82%B3%E3%83%BC%E3%83%89](https://ja.wikipedia.org/wiki/改行コード)">换行符</a>在同一个文件中不可混用
 * 不推荐使用本指南中没有涉及到的 html 标签和 css 属性
 * 若非因出版社的要求，不插入注释
 * 正文中标签中属性的先后顺序是：`epub:type` → `class` → `id` → `src/href` → `alt`
@@ -88,14 +86,14 @@ root 文件夹
 ```html
 <!-- 错误的标签换行 -->
 <h1>
-テキスト
+文本
 </h1>
-<div><p>テキスト</p></div>
+<div><p>文本</p></div>
 
 <!-- 正确的标签换行 -->
-<h1>テキスト</h1>
+<h1>文本</h1>
 <div>
- <p>テキスト</p>
+ <p>文本</p>
 </div>
 ```
 
@@ -109,9 +107,9 @@ root 文件夹
 
 除非另有说明，否则请使用以下模板和文件名规定。 如需要除此处列出的模板或文件名规定之外的模板或文件名规定的情况，请遵循各出版商的规定。
 
-* 源（文本）的整理
+* 源码的格式化
 
-关于源的格式，例如源中的换行符和缩进，以及元素中的标签属性顺序，按照出商的规定执行。 除非另有说明，否则请根据以下模板进行整理规范格式化。
+关于源码的格式，例如的换行符和缩进，以及元素中的标签属性顺序，按照出版商的规定执行。 除非另有说明，否则请根据以下模板进行整理规范进行格式化。
 
 * 关于模板中的颜色表示
 
@@ -147,11 +145,11 @@ root 文件夹
 
 #### 4-3: standard.opf
 
-* 如果阅读器具有显示 `<dc:title>` 信息的功能，所有内容一定会被阅读系统显示在屏幕上。
+* 如果阅读器具有显示 `<dc:title>` 信息的功能，所有内容一定会被阅读系统显示在屏幕上的某处。
 
 * 如果阅读器具有显示 `<dc:creator>` 信息的功能，并且可能有多个 `<dc:creator>` 的情况 ，所有内容一定会被阅读系统显示在屏幕的某处。（用于连接多个作者姓名的符号，和（各参与者）职责的表示，会由阅读器自行决定。）
 
-* 是逐个划分多个作者姓名到多个 `<dc:creator>` ，还是将它们全部列在同一个 `<dc:creator>` 中，请遵循出版商的说明。 在分多个标签的情况下，应由出版商指定每个作者的“role”属性和显示顺序。
+* 是逐个划分多个作者姓名到多个 `<dc:creator>` ，还是将它们全部列在同一个 `<dc:creator>` 中，请遵循出版商的说明。 在分多个标签的情况下，应由出版商指定各个作者的“role”属性和显示顺序。
 
 * 由 `file-as` 指定的排列用假名不会显示在读者的阅读器上。
 
@@ -165,9 +163,9 @@ root 文件夹
 
 * 对于从左向右阅读的作品，`<spine>` 的 `page-progression-direction` 由 `rtl` 改为 `ltr`。
 
-* 为了避免 `<spine>` 的 `<itemref>` 中 idref 属性重复的文件不被显示（如Readium），及页面死循环（如Firefox 的 EPUBReader），同一张图片多次出现的场合，以防万一建议准备一个单独的 xhtml 文件来调用图像（例如，white2.xhtml 为第二个白色图像）
+* 为了避免 `<spine>` 的 `<itemref>` 中 idref 属性重复的文件不被显示（如Readium），及页面死循环（如Firefox 的 EPUBReader），同一张图片多次出现的场合，以防万一建议准备一个单独的 xhtml 文件来调用图像（例如，white2.xhtml 为第二次出现的图像）
 
-* （本指南）与电书协的Reflow型EPUB3指南的不同之处有以下几点：
+* （本指南）与电书协的<a href="<http://www.jepa.or.jp/ebookpedia/201508_2553/>">Reflow</a>型EPUB3指南的不同之处有以下几点：
 
   ◇ `<package>` 标签增加 prefix 属性
 
@@ -191,11 +189,11 @@ root 文件夹
 
 <参考信息>
 
-为了使页面快速地适配并显示所有页面固定大小的图像，建议在描述 OPF 文件中的标准大小时进行如下描述：
+为了适配屏幕大小并快速显示页面，建议在描述 OPF 文件中的标准大小时进行如下描述：
 
 * 为 `<package>`标签增加固定布局用的前缀
 * 为 `<metadata>`增加页面图片的标准大小
-* 页面中显示的图像的的长宽，请在下文中蓝色的部分中以px为单位统一记录
+* 使所有的页面长宽相同，在下文中蓝色的部分中以px为单位统一记录
 
 -------
 <div><p><span style="color:#6d6d6d">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></p><p><span style="color:#6d6d6d">&lt;package</span></p><p><span style="color:#6d6d6d">&nbsp; xmlns="http://www.idpf.org/2007/opf"</span></p><p><span style="color:#6d6d6d">&nbsp; version="3.0"</span></p><p><span style="color:#6d6d6d">&nbsp; xml:lang="ja"</span></p><p><span style="color:#6d6d6d">&nbsp; unique-identifier="unique-id"</span></p><p><span style="color:#6d6d6d">&nbsp; prefix="rendition: http://www.idpf.org/vocab/rendition/# </span></p><p><span style="width:36pt; display:inline-block">&nbsp;</span><span style="color:#6d6d6d">&nbsp;&nbsp;&nbsp; ebpaj: http://www.ebpaj.jp/ </span></p><p><span style="color:#fb0007">&nbsp; </span><span style="width:29.5pt; display:inline-block">&nbsp;</span><span style="color:#fb0007">&nbsp;&nbsp;&nbsp; fixed-layout-jp: http://www.digital-comic.jp/</span><span style="font-size:13pt">" </span></p><p><span style="color:#6d6d6d">&gt;</span></p><p><span style="color:#6d6d6d">&nbsp;</span></p><p><span style="color:#6d6d6d">&lt;metadata xmlns:dc="http://purl.org/dc/elements/1.1/"&gt; </span></p><p><span>&nbsp;</span></p><p style="text-align:center; "><span style="color:#fb0007">(</span><span style="color:#fb0007">※</span><span style="color:#fb0007">中略</span><span style="color:#fb0007">) </span></p><p><span>&nbsp;</span></p><p><span style="color:#6d6d6d">&lt;!-- Fixed-Layout Documents</span><span style="color:#6d6d6d">指定</span><span style="color:#6d6d6d"> --&gt;</span></p><p><span style="color:#6d6d6d">&lt;meta property="rendition:layout"&gt;pre-paginated&lt;/meta&gt;</span></p><p><span style="color:#6d6d6d">&lt;meta property="rendition:spread"&gt;landscape&lt;/meta&gt; </span></p><p><span>&nbsp;</span></p><p><span style="color:#fb0007">&lt;!-- </span><span style="color:#fb0007">基準サイス</span><span style="color:#fb0007">゙</span><span style="color:#fb0007"> --&gt;</span></p><p><span style="color:#fb0007">&lt;meta property="fixed-layout-jp:viewport"&gt;width=</span><span style="color:#0000ff">848</span><span style="color:#fb0007">, height=</span><span style="color:#0000ff">1200</span><span style="color:#fb0007">&lt;/meta&gt;</span></p><p><span style="color:#fb0007">&nbsp;</span></p><p><span style="color:#6d6d6d">&lt;!-- etc. --&gt;</span></p><p><span style="color:#6d6d6d">&lt;meta property="ebpaj:guide-version"&gt;1.1&lt;/meta&gt;</span></p><p><span style="color:#6d6d6d">&lt;/metadata&gt;</span></p><p><span>&nbsp;</span></p><p style="text-align:center; "><span style="color:#fb0007">(</span><span style="color:#fb0007">※</span><span style="color:#fb0007">後略</span><span style="color:#fb0007">) </span></p></div>
@@ -208,7 +206,7 @@ root 文件夹
 * 除非出版商另有指示，请只写入封面、目录和版权页面的链接
 * 本规范不支持在导航文档中包含非链接项目
 * 导航目录的实现样式由阅读器决定
-* 将导航文档作为正文目录使用的情况，可参考下文中正文页面的例子，进行样式表等的引入
+* 即使是将导航文档作为正文目录使用的情况，也应参考下文中正文页面的例子，进行样式表等的引入 (?)  //TODO
 * 如果文件名是序号类型的，请作相应调整（在下面的示例中，目录为 p-001.xhtml）
 
 ------
@@ -223,7 +221,7 @@ root 文件夹
 
 * 封面页面 [cover.xhtml]
 
-  以下三个位置以蓝色列出图像的原始大小
+  以下三个位置以蓝色列出页面的原始大小
 
 --------
 
@@ -235,7 +233,7 @@ root 文件夹
 
   与封面相同，但没有 `epub:type ="cover"`
 
-  作品内图片大小统一  //TODO
+  作品内各页面大小统一
 
 --------
 
@@ -271,7 +269,7 @@ fixed-layout-jp.css		······	从 xhtml 文件中调用的文件
 
 * 原则上不修改默认 CSS
 
-  原则上，请不要修改本指南在示例中提供的 CSS 文件。 此 CSS 文件未考虑需要复杂规范的布局。 更改以下 CSS 内容时要小心：
+  原则上，请不要修改本指南在示例中提供的 CSS 文件。 此 CSS 文件未考虑需要复杂规范的布局。 更改像以下 CSS 内容时要注意：
 
   ​	改变 class 的名字
 
@@ -281,9 +279,9 @@ fixed-layout-jp.css		······	从 xhtml 文件中调用的文件
 
   ​	重命名与其他 class 相关联的 class
 
-  ​	追加新的 class
+  ​	增加新的 class
 
-  ​	追加出版商的样式设定
+  ​	增加出版商的样式设定
 
 * 避免重复的 id
 
@@ -291,44 +289,4 @@ fixed-layout-jp.css		······	从 xhtml 文件中调用的文件
 
 ##### 创建自己的 CSS 文件
 
-作为基本规则，建议保存为 UTF-8（无BOM）编码格式，并始终在文件开头插入 `@charset "UTF-8";`。
-
--------
-
-#### 片假名-英文
-
-コミックコンテンツ （电子）漫画书
-
-コンテン content
-
-リーディングシステム reading system (rs)
-
-レイアウト layout
-
-パッケージ package
-
-ファイル file
-
-アイテム item
-
-タイトル title
-
-メイン タイトル main title
-
-サブタイトル sub title
-
-シリーズ series
-
-カバー cover
-
-ナビゲーション navigation
-
-ページ page
-
-システム system
-
-コード code
-
-テンプレート template
-
-デフォルト default
+采用css基本规则，建议保存为 UTF-8（无BOM）编码格式，并始终在文件开头插入 `@charset "UTF-8";`。
